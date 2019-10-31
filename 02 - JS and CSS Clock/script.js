@@ -2,19 +2,29 @@ const hourHand = document.querySelector('.hour-hand');
 const minuteHand = document.querySelector('.min-hand');
 const secondHand = document.querySelector('.second-hand');
 
-const setHour = h => {
+const setAngle = (element, angle, s) => {
+
+    if (angle === 90) {
+        element.style.transitionDuration = '0s';
+    } else {
+        element.style.transitionDuration = '0.1s';
+    }
+    element.style.transform = `rotate(${angle}deg)`;
+}
+
+const setHours = h => {
     const angle = 360 / 12 * h + 90;
-    hourHand.style.transform = `rotate(${angle}deg)`;
+    setAngle(hourHand, angle);
 };
 
-const setMinute = m => {
+const setMinutes = m => {
     const angle = 360 / 60 * m + 90;
-    minuteHand.style.transform = `rotate(${angle}deg)`;
+    setAngle(minuteHand, angle);
 };
 
-const setSecond = s => {
+const setSeconds = s => {
     const angle = 360 / 60 * s + 90;
-    secondHand.style.transform = `rotate(${angle}deg)`;
+    setAngle(secondHand, angle, true);
 };
 
 const getTime = () => {
@@ -26,9 +36,9 @@ const getTime = () => {
 }
 
 const setTime = (h, m, s) => {
-    setHour(h);
-    setMinute(m);
-    setSecond(s);
+    setHours(h);
+    setMinutes(m);
+    setSeconds(s);
 }
 
 const handleTime = () => {
