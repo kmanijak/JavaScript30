@@ -1,20 +1,13 @@
-const spacingInput = document.querySelector('#spacing');
-const blurInput = document.querySelector('#blur');
-const baseInput = document.querySelector('#base');
+const controls = document.querySelectorAll('input');
 
 const setVariable = (variable, value) => {
     document.documentElement.style.setProperty(variable, value);
 }
 
-spacingInput.addEventListener('input', e => {
-    setVariable('--spacing', e.target.value + 'px');
-});
+function handleInput () {
+    const variable = `--${this.name}`;
+    const value = this.value + (this.dataset.sizing || '');
+    setVariable(variable, value);
+}
 
-blurInput.addEventListener('input', e => {
-
-    setVariable('--blur', e.target.value + 'px');
-});
-
-baseInput.addEventListener('input', e => {
-    setVariable('--base', e.target.value);
-});
+controls.forEach(control => control.addEventListener('input', handleInput));
